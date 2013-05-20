@@ -6,7 +6,7 @@ README = os.path.join(os.path.dirname(__file__), 'README.md')
 
 setup(
     name='qeytaks',
-    version = '1.0.0',
+    version = '1.0.1',
     description='keyword and label editor for photos',
     long_description=open(README).read() + 'nn',
     author='Sergey Pisarenko',
@@ -17,5 +17,4 @@ setup(
     packages=['qeytaks'],
     entry_points={
         'console_scripts': [
-            'qeytaks=main:main']},
-    install_requires=['PyQt4'])
+            'qeytaks=main:main']})

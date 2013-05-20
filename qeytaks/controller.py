@@ -50,6 +50,8 @@ class QeyTaks(object):
         QtCore.SIGNAL('textChanged()'),
         self._ValueEdited)
 
+    self._AddPhotos(args[1:])
+
     sys.exit(self.app.exec_())
 
   def _AddPhotos(self, files):
