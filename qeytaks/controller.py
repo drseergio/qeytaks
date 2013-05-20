@@ -36,7 +36,7 @@ class QeyTaks(object):
     self.app.connect(
         self.gui.clearBtn,
         QtCore.SIGNAL('clicked()'),
-        self.model.ClearPhotos)
+        self._ClearPhotos)
     self.app.connect(
         self.gui.addPhotosBtn,
         QtCore.SIGNAL('clicked()'),
@@ -71,6 +71,14 @@ class QeyTaks(object):
       progress.setValue(i)
 
     progress.close()
+
+  def _ClearPhotos(self):
+    self.gui.tagEdit.setEnabled(False)
+    self.gui.tagEdit.setText('')
+    self.gui.labelEdit.setEnabled(False)
+    self.gui.labelEdit.setText('')
+    self.gui.saveBtn.setEnabled(False)
+    self.model.ClearPhotos()
 
   def _ValueEdited(self):
     self.gui.saveBtn.setEnabled(True)

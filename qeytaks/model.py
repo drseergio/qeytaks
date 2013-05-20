@@ -133,8 +133,14 @@ class PhotoModel(QtCore.QAbstractListModel):
       self.photos[path].tags = tags_new
       gexiv.set_tag_multiple(_TAG_TAG, tags_new)
 
-    for gexiv in gexivs:
-      gexiv.save_file()
+    
+    for i in range(len(gexivs)):
+      gexiv = gexivs[i]
+      try:
+        gexiv.save_file()
+      except Exception, e:
+        logging.error('Failed to save %s', paths[i])
+        logging.exception(e)
 
 
 class Photo(object):
