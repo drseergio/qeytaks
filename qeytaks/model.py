@@ -104,29 +104,34 @@ class PhotoModel(QtCore.QAbstractListModel):
         self.labels[path] = label_field
 
     tags_all = tag_field.replace(' ', '').replace('\n', '').split(',')
-    tags_opt = [tag[1:] for tag in tags_all if tag[0] == _TAG_DIFF_CHAR]
-    tags_common = [tag for tag in tags_all if tag[0] != _TAG_DIFF_CHAR]
+    if len(tags_all) == 1 and not tags_all[0]:
+      tags_opt = []
+      tags_common = []
+    else:
+      tags_opt = [tag[1:] for tag in tags_all if tag[0] == _TAG_DIFF_CHAR]
+      tags_common = [tag for tag in tags_all if tag[0] != _TAG_DIFF_CHAR]
 
     for i in range(len(paths)):
       progress.setValue(i)
       path = paths[i]
       gexiv = gexivs[i]
       tags_curr = self.photos[path].tags
+      tags_new = tags_curr[:]
 
       for tag in tags_curr:
         if tag not in tags_opt and tag not in tags_common:
-          tags_curr.remove(tag)
+          tags_new.remove(tag)
           self.tags[tag].remove(path)
 
       for tag in tags_common:
         if tag not in tags_curr:
-          tags_curr.append(tag)
+          tags_new.append(tag)
           if not tag in self.tags.keys():
             self.tags[tag] = []
           self.tags[tag].append(path)
 
-      self.photos[path].tags = tags_curr
-      gexiv.set_tag_multiple(_TAG_TAG, tags_curr)
+      self.photos[path].tags = tags_new
+      gexiv.set_tag_multiple(_TAG_TAG, tags_new)
 
     for gexiv in gexivs:
       gexiv.save_file()
