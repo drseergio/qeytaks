@@ -13,8 +13,8 @@ setup(
     author_email='drseergio@gmail.com',
     url='http://grow-slowly.com',
     license='GPL',
-    py_modules=['main'],
+    py_modules=['qeytaks_main'],
     packages=['qeytaks'],
     entry_points={
         'console_scripts': [
-            'qeytaks=main:main']})
+            'qeytaks=qeytaks_main:main']})
