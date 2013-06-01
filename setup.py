@@ -11,7 +11,7 @@ setup(
     long_description=open(README).read() + 'nn',
     author='Sergey Pisarenko',
     author_email='drseergio@gmail.com',
-    url='http://grow-slowly.com',
+    url='http://pisarenko.net',
     license='GPL',
     py_modules=['qeytaks_main'],
     packages=['qeytaks'],
